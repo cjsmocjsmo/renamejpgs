@@ -1,9 +1,16 @@
-use walkdir::WalkDir;
+use std::env;
 use std::fs;
+use walkdir::WalkDir;
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
 
-    let apath = "/media/pi/taz/Master_HPics/".to_string();
+    if args.len() != 2 {
+        println!("Usage: renamejpgs <directory>");
+        return;
+    }
+
+    let apath = &args[1];
 
     for e in WalkDir::new(apath)
         .follow_links(true)
@@ -33,8 +40,6 @@ fn main() {
                 fs::rename(&fname, &finalname).expect("Unable to rename file");
                 println!("Renamed\n{}\nto\n{}", fname, finalname)
             }
-            // fs::rename(&fname, &newname).expect("Unable to rename file");
-            // println!("Renamed\n{}\nto\n{}", fname, newname)
         };
     }
 }
