@@ -1,21 +1,7 @@
 use walkdir::WalkDir;
 use std::fs;
-// use clap::{Arg, App};
 
 fn main() {
-    // let app = App::new("RenameJpgs")
-    //     .version("0.1.0")
-    //     .author("cjsmo")
-    //     .arg(Arg::with_name("path")
-    //         .short("p")
-    //         .long("path")
-    //         .help("Path to rename files in")
-    //         .takes_value(true)
-    //         .required(true));
-
-    // let matches = app.get_matches();
-
-    // let apath = matches.value_of("path").unwrap();
 
     let apath = "/media/pi/taz/Master_HPics/".to_string();
 
@@ -37,6 +23,8 @@ fn main() {
 
             if middlename.contains(".JPG") {
                 finalname = middlename.replace(".JPG", ".jpg");
+            } else if middlename.contains(".jpeg") {
+                finalname = middlename.replace(".jpeg", ".jpg");
             } else {
                 finalname = middlename;
             };
