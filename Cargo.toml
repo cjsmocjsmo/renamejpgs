@@ -7,4 +7,11 @@ edition = "2021"
 
 [dependencies]
 walkdir = "2.3.2"
-clap = "4.4.11"
+
+[dependencies.uuid]
+version = "1.7.0"
+features = [
+    "v4",
+    "fast-rng",
+    "macro-diagnostics",
+]
