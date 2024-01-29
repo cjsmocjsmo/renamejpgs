@@ -2,6 +2,8 @@ use std::env;
 use std::fs;
 use walkdir::WalkDir;
 use uuid::Uuid;
+use std::io::Read;
+use std::io::Write;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -32,11 +34,16 @@ fn main() {
                 
 
                 // open the file in a buffer and read the contents to bytes
-                let mut buffer = fs::read(&fname).expect("Unable to read file");
-                // write the bytes to the new location
-                fs::write(&out_path, &mut buffer).expect("Unable to write file");
+                // let mut buffer = fs::read(&fname).expect("Unable to read file");
+                // // write the bytes to the new location
+                // fs::write(&out_path, &mut buffer).expect("Unable to write file");
                 
-
+                let mut f = std::fs::File::open(fname).unwrap();
+                let mut buffer = Vec::new();
+                f.read_to_end(&mut buffer).unwrap();
+                // write buffer to new_path
+                let mut f = std::fs::File::create(out_path).unwrap();
+                f.write_all(&buffer).unwrap();
                 
             };
         }
