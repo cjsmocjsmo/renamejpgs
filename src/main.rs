@@ -34,12 +34,13 @@ fn main() {
 
                 if middlename.contains(".JPG") {
                     finalname = middlename.replace(".JPG", ".jpg");
-                } else if middlename.contains(".jpeg") {
-                    finalname = middlename.replace(".jpeg", ".jpg");
-                } else if middlename.contains(".PNG") {
-                    finalname = middlename.replace(".PNG", ".png");
-                } else if middlename.contains(".BMP") {
-                    finalname = middlename.replace(".BMP", ".bmp");
+                
+                // else if middlename.contains(".jpeg") {
+                //     finalname = middlename.replace(".jpeg", ".jpg");
+                // } else if middlename.contains(".PNG") {
+                //     finalname = middlename.replace(".PNG", ".png");
+                // } else if middlename.contains(".BMP") {
+                //     finalname = middlename.replace(".BMP", ".bmp");
                 } else {
                     finalname = middlename;
                 };
