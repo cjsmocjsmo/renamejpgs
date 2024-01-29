@@ -32,9 +32,9 @@ fn main() {
                 
 
                 // open the file in a buffer and read the contents to bytes
-                // let mut buffer = fs::read(&fname).expect("Unable to read file");
-                // // write the bytes to the new location
-                // fs::write(&out_path, &mut buffer).expect("Unable to write file");
+                let mut buffer = fs::read(&fname).expect("Unable to read file");
+                // write the bytes to the new location
+                fs::write(&out_path, &mut buffer).expect("Unable to write file");
                 
 
                 
