@@ -5,8 +5,8 @@ use walkdir::WalkDir;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    if args.len() != 2 {
-        println!("Usage: renamejpgs <directory>");
+    if args.len() != 3 {
+        println!("Usage: renamejpgs <directory> <directory>");
         return;
     }
 
@@ -23,32 +23,20 @@ fn main() {
                 // remove fname
                 fs::remove_file(&fname).expect("Unable to remove file");
             } else {
-                let middlename;
-                let finalname;
+                let fn_split = fname.split("/").collect::<Vec<&str>>();
+                let file_name = fn_split.last().unwrap().to_string();
+                // make file_name lowercase
+                let file_name_lower = file_name.to_lowercase();
+                let out_path = format!("{}/{}", &args[2], file_name_lower);
+                print!("{} -> {}\n", fname, out_path);
 
-                if fname.contains(" ") {
-                    middlename = fname.replace(" ", "_");
-                } else {
-                    middlename = fname.clone();
-                };
-
-                if middlename.contains(".JPG") {
-                    finalname = middlename.replace(".JPG", ".jpg");
+                // open the file in a buffer and read the contents to bytes
+                // let mut buffer = fs::read(&fname).expect("Unable to read file");
+                // // write the bytes to the new location
+                // fs::write(&out_path, &mut buffer).expect("Unable to write file");
                 
-                // else if middlename.contains(".jpeg") {
-                //     finalname = middlename.replace(".jpeg", ".jpg");
-                // } else if middlename.contains(".PNG") {
-                //     finalname = middlename.replace(".PNG", ".png");
-                // } else if middlename.contains(".BMP") {
-                //     finalname = middlename.replace(".BMP", ".bmp");
-                } else {
-                    finalname = middlename;
-                };
 
-                if finalname != fname {
-                    fs::rename(&fname, &finalname).expect("Unable to rename file");
-                    println!("Renamed\n{}\nto\n{}", fname, finalname)
-                }
+                
             };
         }
     }
