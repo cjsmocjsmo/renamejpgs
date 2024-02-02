@@ -28,12 +28,12 @@ fn main() {
             } else {
                 let auuid = Uuid::new_v4();
                 let ext_split = fname.split(".").collect::<Vec<&str>>();
-                let ext = ext_split.last().unwrap().to_string().to_lowercase();
+                let mut ext = ext_split.last().unwrap().to_string().to_lowercase();
                 if ext == "jpeg".to_string() {
-                    let ext = "jpg".to_string();
+                    ext = "jpg".to_string();
                 }
                 let out_path = format!("{}/{}.{}", &args[2], auuid, ext);
-                println!("{} ->\n {}", fname, out_path);
+                println!("{} ->\n {}", fname.clone(), out_path);
                 
 
                 // open the file in a buffer and read the contents to bytes
@@ -41,12 +41,13 @@ fn main() {
                 // // write the bytes to the new location
                 // fs::write(&out_path, &mut buffer).expect("Unable to write file");
                 
-                let mut f = std::fs::File::open(fname).unwrap();
+                let mut f = std::fs::File::open(fname.clone()).unwrap();
                 let mut buffer = Vec::new();
                 f.read_to_end(&mut buffer).unwrap();
                 // write buffer to new_path
                 let mut f = std::fs::File::create(out_path).unwrap();
                 f.write_all(&buffer).unwrap();
+                fs::remove_file(fname.clone()).expect("Unable to remove file");
                 
             };
         }
