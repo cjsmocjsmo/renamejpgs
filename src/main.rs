@@ -40,8 +40,8 @@ fn main() {
                 // let mut buffer = fs::read(&fname).expect("Unable to read file");
                 // // write the bytes to the new location
                 // fs::write(&out_path, &mut buffer).expect("Unable to write file");
-                
-                let mut f = std::fs::File::open(fname.clone()).unwrap();
+                let message = format!("Unable to open {}", fname.clone());
+                let mut f = std::fs::File::open(fname.clone()).expect(&message);
                 let mut buffer = Vec::new();
                 f.read_to_end(&mut buffer).unwrap();
                 // write buffer to new_path
