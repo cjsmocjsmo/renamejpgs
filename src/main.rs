@@ -29,6 +29,9 @@ fn main() {
                 let auuid = Uuid::new_v4();
                 let ext_split = fname.split(".").collect::<Vec<&str>>();
                 let ext = ext_split.last().unwrap().to_string().to_lowercase();
+                if ext == "jpeg".to_string() {
+                    let ext = "jpg".to_string();
+                }
                 let out_path = format!("{}/{}.{}", &args[2], auuid, ext);
                 println!("{} ->\n {}", fname, out_path);
                 
